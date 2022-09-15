@@ -22,16 +22,61 @@ cancelBtn[0].addEventListener('click', function(){
     toggleAddDialogue();
 })
 
-
 cancelBtn[1].addEventListener('click', function(){
     clearFields();
     toggleDelDialogue();
 })
 
+let newId = 0
+let bookList = [];
 
-const bookList = [];
-let delIndex = 0;
-let id = 0;
+function retrieveBooks (books) {
+    for (let book of books) {
+    const newLi = document.createElement('li')
+
+    //first div
+    newLi.classList.add('book-element')
+    const imgDiv = document.createElement('div')
+    imgDiv.classList.add('book-element__image')
+    const img = document.createElement('img')
+    img.setAttribute('src', book.url)
+    imgDiv.append(img)
+    newLi.append(imgDiv)
+
+    //second div
+    const textDiv = document.createElement('div')
+    textDiv.classList.add('book-element__info')
+    const title = document.createElement('h2')
+    title.innerText = book.title
+    const rate = document.createElement('p')
+    rate.innerText = `${book.rating}/5`
+    textDiv.append(title)
+    textDiv.append(rate)
+    newLi.append(textDiv)
+    newLi.id = `${book.itemId}`
+    
+    //close li
+    container.append(newLi)
+}
+}
+
+let noOfDelets
+window.addEventListener('load', () => {
+    // window.localStorage.clear()
+    let length = JSON.parse(window.localStorage.getItem('lastLength')) 
+    if (length > 0){
+        bookList = JSON.parse(window.localStorage.getItem('bookStorage'))
+        retrieveBooks(bookList)
+        newId = bookList[bookList.length-1].itemId
+        noOfDelets = JSON.parse(window.localStorage.getItem('deleteCount'))
+        toggleEntryText(length)
+    } else {
+        newId = 0
+        noOfDelets = 0
+    }
+})
+
+id = newId;
 addBtn.addEventListener('click', function(){
     const book = {}
     let bookTitle = ''; let bookUrl =''; let bookRating ='';
@@ -52,14 +97,15 @@ addBtn.addEventListener('click', function(){
                 clearFields()
                 createListItem(book)
                 bookList.push(book)
-                toggleEntryText()
+                window.localStorage.setItem('bookStorage', JSON.stringify(bookList))
+                window.localStorage.setItem('lastLength', JSON.stringify(bookList.length))
+                toggleEntryText(bookList.length)
             }
         }     
     }
 })
 
 let removeNum;
-let noOfDelets = 0;
 
 function createListItem (item){
     const newLi = document.createElement('li')
@@ -87,27 +133,29 @@ function createListItem (item){
 
     //close li
     container.append(newLi)
-
-    removeNum = item.itemId
 }
 
 let delTarget
 container.addEventListener('click', function(e){
      toggleDelDialogue()
+     console.log(bookList.length)
      delTarget = e.target
+     console.log(bookList)
 })
 delBtn.addEventListener('click', ()=> {
     deleteBook(delTarget,removeNum)
-    console.log(bookList.length)
-    console.log(bookList)
-    toggleEntryText()
+    // console.log(bookList.length)
+    toggleEntryText(bookList.length)
     toggleDelDialogue()
+    window.localStorage.setItem('bookStorage', JSON.stringify(bookList))
+    window.localStorage.setItem('lastLength', JSON.stringify(bookList.length))
 })
 
-function deleteBook (node,removeNo){
+function deleteBook (node){
     if (node.nodeName !== 'LI') {
         return deleteBook(node.parentNode)
     } else {
+        console.log(node.id)
         node.remove()
         if (node.id == 0){
             bookList.splice(0,1)
@@ -116,13 +164,15 @@ function deleteBook (node,removeNo){
             let delIndex = node.id - noOfDelets
             bookList.splice(delIndex,1)
             noOfDelets +=1;
+            window.localStorage.setItem('deleteCount',JSON.stringify(noOfDelets))
         }
         return 
     }
 }
 
-function toggleEntryText(){
-    if (bookList.length != 0){
+
+function toggleEntryText(length){
+    if (length != 0){
         emptyCard.style.display = 'none'
     } else {
         emptyCard.style.display = 'block'
