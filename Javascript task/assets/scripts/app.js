@@ -59,6 +59,7 @@ addBtn.addEventListener('click', function(){
 })
 
 let removeNum;
+let noOfDelets = 0;
 
 function createListItem (item){
     const newLi = document.createElement('li')
@@ -82,6 +83,7 @@ function createListItem (item){
     textDiv.append(title)
     textDiv.append(rate)
     newLi.append(textDiv)
+    newLi.id = `${item.itemId}`
 
     //close li
     container.append(newLi)
@@ -107,7 +109,14 @@ function deleteBook (node,removeNo){
         return deleteBook(node.parentNode)
     } else {
         node.remove()
-        bookList.splice(removeNo,1)
+        if (node.id == 0){
+            bookList.splice(0,1)
+            noOfDelets +=1
+        } else {
+            let delIndex = node.id - noOfDelets
+            bookList.splice(delIndex,1)
+            noOfDelets +=1;
+        }
         return 
     }
 }
