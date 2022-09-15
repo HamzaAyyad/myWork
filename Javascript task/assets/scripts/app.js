@@ -29,6 +29,7 @@ cancelBtn[0].addEventListener('click', function(){
 cancelBtn[1].addEventListener('click', function(){
     clearFields();
     toggleDelDialogue();
+    location.reload();
 })
 
 let newId = 0
