@@ -29,7 +29,7 @@ cancelBtn[0].addEventListener('click', function(){
 cancelBtn[1].addEventListener('click', function(){
     clearFields();
     toggleDelDialogue();
-    location.reload();
+    location.reload()
 })
 
 let newId = 0
@@ -182,6 +182,10 @@ addBtn.addEventListener('click', function(){
     }
 })
 
+function clearSearchField () {
+    searchField.value = ''
+}
+
 let removeNum;
 
 function createListItem (item){
@@ -230,6 +234,7 @@ searchField.addEventListener('input', (e) => {
 let delTarget
 container.addEventListener('click', function(e){
      toggleDelDialogue()
+     clearSearchField()
      //console.log(bookList.length)
      delTarget = e.target
      //console.log(bookList)
