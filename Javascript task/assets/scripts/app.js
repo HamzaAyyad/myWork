@@ -67,7 +67,7 @@ function retrieveBooks (books) {
 }
 }
 
-let noOfDelets
+let noOfDelets;
 const pageLimit = 3;
 let pageCount = 2;
 let currentPage;
@@ -84,9 +84,11 @@ window.addEventListener('load', () => {
         noOfDelets = JSON.parse(window.localStorage.getItem('deleteCount'))
 
         toggleEntryText(length)
+
         if (length > 2) {
              pageCount = Math.ceil(length / pageLimit);
         }
+
         getPaginationNumbers()
         setCurrentPage(1)
         document.querySelectorAll(".pagination-number").forEach((button) => {
@@ -149,6 +151,7 @@ const appendPageNumber = (index) => {
     });
   };
 
+
 id = newId;
 addBtn.addEventListener('click', function(){
     const book = {}
@@ -182,11 +185,6 @@ addBtn.addEventListener('click', function(){
     }
 })
 
-function clearSearchField () {
-    searchField.value = ''
-}
-
-let removeNum;
 
 function createListItem (item){
     const newLi = document.createElement('li')
@@ -216,8 +214,7 @@ function createListItem (item){
     //close li
     container.append(newLi)
 }
-// let str = 'test'
-// str.includes()
+
 
 searchField.addEventListener('input', (e) => {
     for (let i=0;i<bookList.length;i++) {
@@ -229,22 +226,23 @@ searchField.addEventListener('input', (e) => {
     }
 })
 
-
+function clearSearchField () {
+    searchField.value = ''
+};
 
 let delTarget
 container.addEventListener('click', function(e){
      toggleDelDialogue()
      clearSearchField()
-     //console.log(bookList.length)
+     
      delTarget = e.target
-     //console.log(bookList)
-     //console.log(listItems)
 })
 delBtn.addEventListener('click', ()=> {
-    deleteBook(delTarget,removeNum)
-    // console.log(bookList.length)
+    deleteBook(delTarget)
+    
     toggleEntryText(bookList.length)
     toggleDelDialogue()
+    
     window.localStorage.setItem('bookStorage', JSON.stringify(bookList))
     window.localStorage.setItem('lastLength', JSON.stringify(bookList.length))
     location.reload()
