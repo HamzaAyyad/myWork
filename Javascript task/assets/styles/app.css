@@ -235,6 +235,51 @@
     flex-direction: column;
   }
   
+  .pagination-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 0;
+    justify-content: center;
+  }
+   
+  .pagination-number,
+  .pagination-button{
+    font-size: 1.1rem;
+    background-color: transparent;
+    border: none;
+    margin: 0.25rem 0.25rem;
+    cursor: pointer;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: .2rem;
+  }
+   
+  .pagination-number:hover,
+  .pagination-button:not(.disabled):hover {
+    background: #fff;
+  }
+   
+  .pagination-number.active {
+    color: #fff;
+    background: #00329e;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .search-field {
+    float: right;
+    /* position: relative; */
+    padding: 6px;
+    border-style: double;
+    border: black;
+    margin-top: 5px;
+    margin-right: 16px;
+    font-size: 17px;
+  }
+
   @media (min-width: 768px) {
     .modal {
       width: 40rem;
