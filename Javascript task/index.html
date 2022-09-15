@@ -46,13 +46,28 @@
     <header>
       <h1>Favorite Books</h1>
       <button>ADD BOOK</button>
+      <input type="text" placeholder="Search" class="search-field" id="search">
     </header>
 
+    
     <main>
       <section id="entry-text" class="card">
         <p>List Currently Empty!!!</p>
       </section>
       <ul id="book-list"></ul>
+      <nav class="pagination-container">
+        <button class="pagination-button" id="prev-button" title="Previous page" aria-label="Previous page">
+          &lt;
+        </button>
+         
+        <div id="pagination-numbers">
+       
+        </div>
+         
+        <button class="pagination-button" id="next-button" title="Next page" aria-label="Next page">
+          &gt;
+        </button>
+      </nav>
     </main>
   </body>
 </html>
