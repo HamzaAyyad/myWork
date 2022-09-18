@@ -15,10 +15,13 @@ const nextButton = document.getElementById("next-button");
 const prevButton = document.getElementById("prev-button");
 const searchField = document.querySelector('#search')
 
-
+let id = 0;
 toggleDialogueBtn.addEventListener('click', function(){
     toggleAddDialogue()
+    id = parseInt(newId)
+    console.log(id)
 })
+
 
 cancelBtn[0].addEventListener('click', function(){
     clearFields();
@@ -32,7 +35,7 @@ cancelBtn[1].addEventListener('click', function(){
     location.reload()
 })
 
-let newId = 0
+
 let bookList = [];
 let listItems = []
 
@@ -67,42 +70,38 @@ function retrieveBooks (books) {
 }
 }
 
-let noOfDelets;
 const pageLimit = 3;
 let pageCount = 2;
 let currentPage;
-
 window.addEventListener('load', () => {
-    //window.localStorage.clear()
+    // window.localStorage.clear()
+    newId = 0
     let length = JSON.parse(window.localStorage.getItem('lastLength')) 
-
+    
     if (length > 0){
         bookList = JSON.parse(window.localStorage.getItem('bookStorage'))
         retrieveBooks(bookList)
-
-        newId = bookList[bookList.length-1].itemId + 1
-        noOfDelets = JSON.parse(window.localStorage.getItem('deleteCount'))
-
+        
+        newId = bookList[bookList.length-1].itemId +1
+        
         toggleEntryText(length)
-
+        
         if (length > 2) {
-             pageCount = Math.ceil(length / pageLimit);
+            pageCount = Math.ceil(length / pageLimit);
         }
-
+        
         getPaginationNumbers()
         setCurrentPage(1)
         document.querySelectorAll(".pagination-number").forEach((button) => {
-            console.log('clicked')
             const pageIndex = Number(button.getAttribute("page-index"));
             if (pageIndex) {
-              button.addEventListener("click", () => {
-                setCurrentPage(pageIndex);
-              });
+                button.addEventListener("click", () => {
+                    setCurrentPage(pageIndex);
+                });
             }
-          })
+        })
     } else {
         newId = 0
-        noOfDelets = 0
     }
 })
 
@@ -115,44 +114,43 @@ const appendPageNumber = (index) => {
     pageNumber.setAttribute("aria-label", "Page " + index);
    
     paginationNumbers.appendChild(pageNumber);
-  };
-   
-  const getPaginationNumbers = () => {
+};
+
+const getPaginationNumbers = () => {
     for (let i = 1; i <= pageCount; i++) {
-      appendPageNumber(i);
+        appendPageNumber(i);
     }
-  }
+}
 
-  const handleActivePageNumber = () => {
+const handleActivePageNumber = () => {
     document.querySelectorAll(".pagination-number").forEach((button) => {
-      button.classList.remove("active");
-       
-      const pageIndex = Number(button.getAttribute("page-index"));
-      if (pageIndex == currentPage) {
-        button.classList.add("active");
-      }
+        button.classList.remove("active");
+        
+        const pageIndex = Number(button.getAttribute("page-index"));
+        if (pageIndex == currentPage) {
+            button.classList.add("active");
+        }
     });
-  };
+};
 
 
-  const setCurrentPage = (pageNum) => {
+const setCurrentPage = (pageNum) => {
     currentPage = pageNum;
-     
+    
     handleActivePageNumber()
-
+    
     const prevRange = (pageNum - 1) * pageLimit;
     const currRange = pageNum * pageLimit;
-   
+    
     listItems.forEach((item, index) => {
-      item.classList.add("hidden");
-      if (index >= prevRange && index < currRange) {
-        item.classList.remove("hidden");
-      }
+        item.classList.add("hidden");
+        if (index >= prevRange && index < currRange) {
+            item.classList.remove("hidden");
+        }
     });
-  };
+};
 
 
-id = newId;
 addBtn.addEventListener('click', function(){
     const book = {}
     let bookTitle = ''; let bookUrl =''; let bookRating ='';
@@ -174,10 +172,10 @@ addBtn.addEventListener('click', function(){
                 clearFields()
                 createListItem(book)
                 bookList.push(book)
-
+                
                 window.localStorage.setItem('bookStorage', JSON.stringify(bookList))
                 window.localStorage.setItem('lastLength', JSON.stringify(bookList.length))
-
+                
                 toggleEntryText(bookList.length)
                 
             }
@@ -188,7 +186,7 @@ addBtn.addEventListener('click', function(){
 
 function createListItem (item){
     const newLi = document.createElement('li')
-
+    
     //first div
     newLi.classList.add('book-element')
     const imgDiv = document.createElement('div')
@@ -197,7 +195,7 @@ function createListItem (item){
     img.setAttribute('src', item.url)
     imgDiv.append(img)
     newLi.append(imgDiv)
-
+    
     //second div
     const textDiv = document.createElement('div')
     textDiv.classList.add('book-element__info')
@@ -209,22 +207,37 @@ function createListItem (item){
     textDiv.append(rate)
     newLi.append(textDiv)
     newLi.id = `${item.itemId}`
+    if (item.itemId > 2){
+        newLi.classList.add('hidden')
+    }
     listItems.push(newLi)
-
+    
+    
     //close li
     container.append(newLi)
 }
 
-
 searchField.addEventListener('input', (e) => {
+    let temp =''
+    let count =0;
     for (let i=0;i<bookList.length;i++) {
-        if (!bookList[i].title.includes(searchField.value)) {
-            listItems[i].classList.add('hidden')
+        temp = bookList[i].title.toLowerCase()
+        if (temp.includes(searchField.value.toLowerCase())) {
+            if (count < 3){
+                listItems[i].classList.remove('hidden')
+                count++
+            } else {
+                listItems[i].classList.add('hidden')
+            }
         } else {
-            listItems[i].classList.remove('hidden')
+            listItems[i].classList.add('hidden')
         }
     }
+    if (searchField.value.length == 0){
+        setCurrentPage(1);
+    }
 })
+
 
 function clearSearchField () {
     searchField.value = ''
@@ -232,10 +245,10 @@ function clearSearchField () {
 
 let delTarget
 container.addEventListener('click', function(e){
-     toggleDelDialogue()
-     clearSearchField()
-     
-     delTarget = e.target
+    toggleDelDialogue()
+    clearSearchField()
+    console.log(bookList)
+    delTarget = e.target
 })
 delBtn.addEventListener('click', ()=> {
     deleteBook(delTarget)
@@ -248,20 +261,23 @@ delBtn.addEventListener('click', ()=> {
     location.reload()
 })
 
+let noOfDelets = 0;
 function deleteBook (node){
     if (node.nodeName !== 'LI') {
         return deleteBook(node.parentNode)
     } else {
-        console.log(node.id)
         node.remove()
         if (node.id == 0){
             bookList.splice(0,1)
             noOfDelets +=1
         } else {
-            let delIndex = node.id - noOfDelets
-            bookList.splice(delIndex,1)
-            noOfDelets +=1;
-            window.localStorage.setItem('deleteCount',JSON.stringify(noOfDelets))
+            for (let i =0;i<listItems.length;i++){
+                if (node.id == listItems[i].id) {
+                let delIndex = i - noOfDelets
+                bookList.splice(delIndex,1)
+                noOfDelets +=1;
+                }
+            }
         }
         return 
     }
