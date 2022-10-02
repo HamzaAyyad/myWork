@@ -1,0 +1,17 @@
+<mat-card style="text-align: center;">
+    <mat-card-title>
+        <fa-icon [icon]="faCheck" style="color: green;"></fa-icon>
+    </mat-card-title>
+    <mat-card-content>Survey Name</mat-card-content>
+    <mat-card-footer>
+        <mat-form-field [color]="'accent'" appearance="outline">
+            <mat-label>Select Date</mat-label>
+            <mat-select placeholder="Select Date">
+                <mat-option *ngFor="let surveyPeriod of SurveyPeriods2" 
+                [value]="surveyPeriod.START_DATE - surveyPeriod.END_DATE">
+                    {{surveyPeriod.START_DATE}} - {{surveyPeriod.END_DATE}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-card-footer>
+</mat-card>
