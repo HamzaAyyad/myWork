@@ -1,4 +1,4 @@
-.example-spacer {
+.toolbar-spacer {
     flex: 1 1 auto;
   }
 
@@ -35,10 +35,48 @@
 
   .cards-container {
     background-color: white;
+    margin: 10px; 
+    padding-bottom: 200px;
+  }
+
+  .info-tip {
+    background-color: lightcyan;
+    margin: 10px;
+    padding: 7px;
+  }
+
+  .info-color {
+    color: cornflowerblue;
   }
 
   .x-mark {
     position: absolute;
-    right: 5px;
+    right: 25px;
+    margin-top: 15px;
   }
-  
+
+  ::ng-deep .mat-tab-body-content {
+    overflow: hidden !important;
+    margin: 15px;
+  }
+
+  ::ng-deep .mat-ink-bar {
+    background-color: rgb(102, 202, 155) !important ;
+  }
+
+  ::ng-deep .mat-tab-body.mat-tab-body-active {
+    overflow-y: hidden !important ;
+  }
+
+  ::ng-deep span .mat-raised-button.mat-accent {
+    background-color: rgb(102, 202, 155);
+  }
+
+  ::ng-deep .mat-tab-label
+{
+  height: 27px !important;
+  min-height: 5px!important;
+  margin: 3px!important;
+  width: 90px!important;
+  min-width: 5px!important;
+}

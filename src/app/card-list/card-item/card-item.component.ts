@@ -27,6 +27,8 @@ export class CardItemComponent implements OnInit {
     END_DATE: '10/4/2021'
   }];
 
+  count: number = this.SurveyPeriods2.length
+
   constructor() { }
 
   ngOnInit(): void {

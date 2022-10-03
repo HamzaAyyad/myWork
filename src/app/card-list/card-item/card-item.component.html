@@ -1,17 +1,29 @@
-<mat-card style="text-align: center;">
+<mat-card class="card" [ngClass]="{'card-publish': true}">
     <mat-card-title>
-        <fa-icon [icon]="faCheck" style="color: green;"></fa-icon>
+        <fa-icon [icon]="faCheck" style="color: rgb(102, 202, 155);"></fa-icon>
     </mat-card-title>
+
     <mat-card-content>Survey Name</mat-card-content>
-    <mat-card-footer>
-        <mat-form-field [color]="'accent'" appearance="outline">
-            <mat-label>Select Date</mat-label>
-            <mat-select placeholder="Select Date">
-                <mat-option *ngFor="let surveyPeriod of SurveyPeriods2" 
+
+    <mat-card-footer style="border-top: 1px solid lightgrey;">
+        <mat-form-field *ngIf="count > 1; else onePeriod"
+         [color]="'accent'" 
+         [floatLabel]="'never'"
+         style="text-align: center; height: 45px;">
+            <!-- <mat-label>Select Date</mat-label> -->
+            <mat-select placeholder="Select Period">
+                <div>
+                <mat-option *ngFor="let surveyPeriod of SurveyPeriods1" 
                 [value]="surveyPeriod.START_DATE - surveyPeriod.END_DATE">
                     {{surveyPeriod.START_DATE}} - {{surveyPeriod.END_DATE}}
                 </mat-option>
-            </mat-select>
-        </mat-form-field>
+            </div>
+        </mat-select>
+    </mat-form-field>
+    <ng-template  #onePeriod>
+    <p [ngClass]="{'surv-period':true}">
+        {{SurveyPeriods1[0].START_DATE}} - {{SurveyPeriods1[0].END_DATE}}
+    </p>
+    </ng-template>
     </mat-card-footer>
 </mat-card>

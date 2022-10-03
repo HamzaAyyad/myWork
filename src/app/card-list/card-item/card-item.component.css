@@ -1,0 +1,45 @@
+.card {
+    width: 240px;
+    margin-left: 10px;
+}
+
+.card-publish {
+    text-align: center;
+    border-top: 5px solid rgb(102, 202, 155);
+}
+
+.card-publish:hover {
+    border-bottom: 2px solid rgb(102, 202, 155);
+    border-left: 2px solid rgb(102, 202, 155);
+    border-right: 2px solid rgb(102, 202, 155);
+    transition: all 90ms linear;
+    cursor: pointer;
+}
+
+.surv-period {
+    height: 15px;
+    margin-top: 5px;
+}
+.survey-periods {
+    height: 45px;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+  }
+
+::ng-deep .mat-accent .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: rgb(102, 202, 155);
+  }
+
+::ng-deep .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+    background-color: white;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label.mat-accent {
+    color: rgb(102, 202, 155);
+}
+
+::ng-deep .mat-form-field.mat-focused.mat-accent .mat-select-arrow {
+    color: rgb(102, 202, 155);
+}

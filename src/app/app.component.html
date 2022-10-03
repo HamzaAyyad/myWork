@@ -1,7 +1,7 @@
 <header>
   <mat-toolbar>
   <span>AL-KHWARIZMI</span>
-  <span class="example-spacer"></span>
+  <span class="toolbar-spacer"></span>
   <div>
     <p class="user-account">
       <button mat-mini-fab class="toolbar-button">
@@ -16,21 +16,32 @@
 </mat-toolbar>
 </header>
 
-<div class="cards-container">
-   <p style="background-color: lightcyan;"><fa-icon style="color: cornflowerblue;"[icon]="circleInfo"></fa-icon>
-  <span style="color: cornflowerblue;"> Information:</span> Select Template to Continue 
-  <mat-icon class="x-mark">close</mat-icon></p>
+<div class="cards-container" fxLayout="row wrap" fxLayoutAlign="space-between start">
+
+   <p fxFlex="100%" class="info-tip"><fa-icon class="info-color" [icon]="circleInfo"></fa-icon>
+  <span class="info-color"> Information:</span> Select Template to Continue 
+  </p><mat-icon class="x-mark info-color">close</mat-icon>
+
   <mat-tab-group [color]="'accent'">
-    <mat-tab label="Published">
-      <div fxLayout="row wrap" fxLayoutGap="10px">
-        <div fxFlex="25%">
-          <app-card-item></app-card-item>
-          <app-card-item></app-card-item>
-        </div>
-      </div>
-       </mat-tab>
-    <mat-tab label="Expired"> Expired </mat-tab>
-    <mat-tab label="Closed"> Closed </mat-tab>
-    <mat-tab label="All Surveys"> All Surveys </mat-tab>
+    <mat-tab label="Published"></mat-tab>
+    <mat-tab label="Expired"></mat-tab>
+    <mat-tab label="Closed"></mat-tab>
+    <mat-tab label="All Surveys"></mat-tab>
   </mat-tab-group>
+
+  
+  <span style="margin-right: 7px;">
+    <button mat-raised-button [color]="'accent'">Go to Dashboard</button>
+    <!-- <mat-form-field style="font-size: 10px;"> 
+      <input mat-input placeholder="Search">
+    </mat-form-field> -->
+  </span>
+
+
+  <div fxLayout="row wrap" fxLayoutGap="5px grid">
+    <div fxFlex="25%" *ngFor="let num of [1,2,3,4,5,6]">
+      <app-card-item class="card"></app-card-item>
+    </div>
+  </div>
+
 </div>
