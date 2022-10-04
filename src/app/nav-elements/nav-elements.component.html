@@ -1,0 +1,25 @@
+<div class="nav-container" fxLayout="row wrap" fxLayoutAlign="space-between start">
+<p fxFlex="100%" class="info-tip"><fa-icon class="info-color" [icon]="circleInfo"></fa-icon>
+    <span class="info-color"> Information:</span> Select Template to Continue 
+    </p><mat-icon class="x-mark info-color">close</mat-icon>
+  
+    <mat-tab-group [color]="'accent'">
+      <mat-tab label="Published"></mat-tab>
+      <mat-tab label="Expired"></mat-tab>
+      <mat-tab label="Closed"></mat-tab>
+      <mat-tab label="All Surveys"></mat-tab>
+    </mat-tab-group>
+  
+    
+    <span style="margin-right: 7px;">
+      <button mat-raised-button [color]="'accent'">Go to Dashboard</button>
+      <div style="display: inline;">
+      <input type="text" name="search" id="search" placeholder="Search survey name">
+      <mat-icon class="search-icon">search</mat-icon>
+    </div>
+    <button mat-stroked-button [color]="'accent'" class="filter-button">Filter</button>
+      <!-- <mat-form-field style="font-size: 10px;"> 
+        <input mat-input placeholder="Search">
+      </mat-form-field> -->
+    </span>
+</div>

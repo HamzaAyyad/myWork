@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,12 +19,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { AppComponent } from './app.component';
 import { CardListComponent } from './card-list/card-list.component';
 import { CardItemComponent } from './card-list/card-item/card-item.component';
+import { HeaderComponent } from './header/header.component';
+import { MainComponent } from './main/main.component';
+import { NavElementsComponent } from './nav-elements/nav-elements.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardListComponent,
-    CardItemComponent
+    CardItemComponent,
+    HeaderComponent,
+    MainComponent,
+    NavElementsComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +40,7 @@ import { CardItemComponent } from './card-list/card-item/card-item.component';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    HttpClientModule,
 
     MatToolbarModule,
     MatIconModule,

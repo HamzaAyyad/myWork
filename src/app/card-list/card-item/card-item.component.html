@@ -1,29 +1,31 @@
-<mat-card class="card" [ngClass]="{'card-publish': true}">
+<mat-card class="card" [ngClass]="{'card-publish': surveyItem.SURVEY_STATUS_EN === 'Published',
+'card-expired': surveyItem.SURVEY_STATUS_EN === 'Expired',
+'card-closed': surveyItem.SURVEY_STATUS_EN === 'Closed'}">
     <mat-card-title>
-        <fa-icon [icon]="faCheck" style="color: rgb(102, 202, 155);"></fa-icon>
+        <ng-container [ngSwitch]="surveyItem.SURVEY_STATUS_EN">
+            <fa-icon *ngSwitchCase="'Published'" [icon]="faCheck" style="color:rgb(102, 202, 155)"></fa-icon>
+            <mat-icon *ngSwitchCase="'Expired'" style="color: grey;">alarm</mat-icon>
+            <mat-icon *ngSwitchCase="'Closed'" style="color: grey;">lock</mat-icon>
+        </ng-container>
+        
     </mat-card-title>
-
-    <mat-card-content>Survey Name</mat-card-content>
-
+    
+    <mat-card-content>{{surveyItem.SurveyName}}</mat-card-content>
+    
     <mat-card-footer style="border-top: 1px solid lightgrey;">
-        <mat-form-field *ngIf="count > 1; else onePeriod"
+        <mat-form-field  
          [color]="'accent'" 
          [floatLabel]="'never'"
          style="text-align: center; height: 45px;">
             <!-- <mat-label>Select Date</mat-label> -->
             <mat-select placeholder="Select Period">
                 <div>
-                <mat-option *ngFor="let surveyPeriod of SurveyPeriods1" 
+                <mat-option *ngFor="let surveyPeriod of surveyPeriods" 
                 [value]="surveyPeriod.START_DATE - surveyPeriod.END_DATE">
-                    {{surveyPeriod.START_DATE}} - {{surveyPeriod.END_DATE}}
+                    {{surveyPeriod.START_DATE | date:'dd/MM/yyyy'}} - {{surveyPeriod.END_DATE | date:'dd/MM/yyyy'}}
                 </mat-option>
             </div>
         </mat-select>
     </mat-form-field>
-    <ng-template  #onePeriod>
-    <p [ngClass]="{'surv-period':true}">
-        {{SurveyPeriods1[0].START_DATE}} - {{SurveyPeriods1[0].END_DATE}}
-    </p>
-    </ng-template>
     </mat-card-footer>
 </mat-card>

@@ -1,6 +1,7 @@
 .card {
-    width: 240px;
+    width: 220px;
     margin-left: 10px;
+    margin-bottom:10px ;
 }
 
 .card-publish {
@@ -12,6 +13,31 @@
     border-bottom: 2px solid rgb(102, 202, 155);
     border-left: 2px solid rgb(102, 202, 155);
     border-right: 2px solid rgb(102, 202, 155);
+    transition: all 90ms linear;
+    cursor: pointer;
+}
+
+.card-expired {
+    text-align: center;
+    border-top: 5px solid grey;
+}
+
+.card-expired:hover {
+    border-bottom: 2px solid grey;
+    border-left: 2px solid grey;
+    border-right: 2px solid grey;
+    transition: all 90ms linear;
+    cursor: pointer;
+}
+.card-closed {
+    text-align: center;
+    border-top: 5px solid grey;
+}
+
+.card-closed:hover {
+    border-bottom: 2px solid grey;
+    border-left: 2px solid grey;
+    border-right: 2px solid grey;
     transition: all 90ms linear;
     cursor: pointer;
 }
