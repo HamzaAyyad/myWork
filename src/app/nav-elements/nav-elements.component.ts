@@ -8,10 +8,19 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 })
 export class NavElementsComponent implements OnInit {
   circleInfo = faInfoCircle;
+  // gridBtnState = false;
+  // listBtnState = false;
+  viewBtnState = false
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onClickGrid(){
+    this.viewBtnState = !this.viewBtnState;
+  }
+  onClickList(){
+    this.viewBtnState = !this.viewBtnState;
+  }
 }

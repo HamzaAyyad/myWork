@@ -9,8 +9,10 @@ import { SurveysService } from '../services/surveys.service';
 })
 export class CardListComponent implements OnInit {
   surveys: Survey;
+  selectedComponent;
 
   constructor(private surveyService: SurveysService) { }
+
 
   ngOnInit(): void {
       this.surveyService.getSurvery().subscribe((surveys) => this.surveys = surveys[0])
@@ -18,6 +20,15 @@ export class CardListComponent implements OnInit {
 
   outputSurvey(){
     console.log (this.surveys)
+  }
+
+  cardSelected(event){
+    console.log(this.selectedComponent)
+      if (event.value.selected) {
+        this.selectedComponent = event.value.styleID;
+      } else {
+        this.selectedComponent = '';
+      }
   }
 
 }
