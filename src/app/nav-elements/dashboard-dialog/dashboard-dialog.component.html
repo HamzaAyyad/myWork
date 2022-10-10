@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Survey:</h1>
+<div mat-dialog-content>
+  <p>Data to send back</p>
+  <mat-form-field appearance="outline" style="width: 250px;">
+    <mat-label>Data</mat-label>
+    <input matInput minlength="4" [(ngModel)]="dialogName" (keydown)="surveyNameCheck($event)">
+    <mat-hint class="mat-error" *ngIf="hasError">Name must be english and at least 4 letters</mat-hint>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="dialogName" cdkFocusInitial>Ok</button>
+</div>

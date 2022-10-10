@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Survey } from 'src/app/survey';
-import { faCheckCircle } from '@fortawesome/free-regular-svg-icons'; 
+import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 
 
 @Component({
@@ -13,18 +13,22 @@ export class CardItemComponent implements OnInit {
   @Input() surveyItem: Survey;
   @Output() cardClicked = new EventEmitter();
   surveyPeriods:any[];
-  private _selected:boolean;
+  selected:boolean = false;
   styleID:string;
-
+  periodsCount:number;
 
   constructor() { }
 
-  get selected():boolean {
-    return this._selected;
+  ngOnInit(): void {
+    // this.surveyPeriods = JSON.parse(this.surveyItem.SurveyPeriods);
+    this.surveyItem.SurveyPeriods = JSON.parse(this.surveyItem.SurveyPeriods);
+    this.periodsCount = this.surveyItem.SurveyPeriods.length;
+    this.styleID = String(this.surveyItem.SRV_ID)
   }
 
-  set selected(value: boolean) {
-    this._selected = value;
+  onCardSelect(){
+    this.selected = !this.selected;
+    this.cardClicked.emit({value: this})
     if (this.selected) {
       document.getElementById(this.styleID)
       .classList.add(`card-${this.surveyItem.SURVEY_STATUS_EN}-active`);
@@ -34,15 +38,14 @@ export class CardItemComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.surveyPeriods = JSON.parse(this.surveyItem.SurveyPeriods);
-    this.styleID = String(this.surveyItem.SRV_ID)
+  unselect(cardId:number){
+    if (cardId === this.surveyItem.SRV_ID) {
+      document.getElementById(this.styleID)
+      .classList.add(`card-${this.surveyItem.SURVEY_STATUS_EN}-active`);
+    } else {
+      this.selected = false;
+      document.getElementById(this.styleID)
+      .classList.remove(`card-${this.surveyItem.SURVEY_STATUS_EN}-active`);
+    }
   }
-
-  onCardSelect(){
-    this.selected = !this.selected;
-    this.cardClicked.emit({value: this})
-  }
-
-
 }
