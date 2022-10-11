@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SurveysService {
-  private apiUrl = 'https://mocki.io/v1/bf84746c-ec9a-4230-8517-68d409b860f1';
+  private apiUrl = 'https://mocki.io/v1/f2d2f70b-cd44-42c5-95a7-b7e64bc1ebc4';
 
   constructor(private http:HttpClient) { }
 

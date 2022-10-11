@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-main',
@@ -8,12 +6,16 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  circleInfo = faInfoCircle;
-  searchIcon = faSearch;
+  viewType:string = 'grid';
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleView(eve) {
+    console.log(eve)
+    this.viewType = eve;
   }
 
 }

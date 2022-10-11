@@ -16,15 +16,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input'
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 import { AppComponent } from './app.component';
-import { CardListComponent } from './card-list/card-list.component';
-import { CardItemComponent } from './card-list/card-item/card-item.component';
+import { CardListComponent } from './card/card-grid/card-grid.component';
+import { CardItemComponent } from './card/card-item/card-item.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { NavElementsComponent } from './nav-elements/nav-elements.component';
 import { DashboardDialogComponent } from './nav-elements/dashboard-dialog/dashboard-dialog.component';
+import { CardTableComponent } from './card/card-table/card-table.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,8 @@ import { DashboardDialogComponent } from './nav-elements/dashboard-dialog/dashbo
     HeaderComponent,
     MainComponent,
     NavElementsComponent,
-    DashboardDialogComponent
+    DashboardDialogComponent,
+    CardTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,10 @@ import { DashboardDialogComponent } from './nav-elements/dashboard-dialog/dashbo
     MatFormFieldModule,
     MatSelectModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

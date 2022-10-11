@@ -23,11 +23,11 @@
     </div>
 
     <span class="view-icons">
-    <button mat-icon-button (click)="onClickGrid()">
+    <button mat-icon-button (click)="onIconClick('grid')">
       <mat-icon [ngClass]="{'view-icon-not-active': viewBtnState,
       'view-icon-active': !viewBtnState}">view_module</mat-icon>
     </button>
-    <button mat-icon-button id="view-list-icon" (click)="onClickList()">
+    <button mat-icon-button id="view-list-icon" (click)="onIconClick('list')">
       <mat-icon [ngClass]="{'view-icon-not-active': !viewBtnState,
       'view-icon-active': viewBtnState}">view_list</mat-icon>
     </button>

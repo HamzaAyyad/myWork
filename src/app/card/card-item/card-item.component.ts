@@ -20,8 +20,6 @@ export class CardItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // this.surveyPeriods = JSON.parse(this.surveyItem.SurveyPeriods);
-    this.surveyItem.SurveyPeriods = JSON.parse(this.surveyItem.SurveyPeriods);
     this.periodsCount = this.surveyItem.SurveyPeriods.length;
     this.styleID = String(this.surveyItem.SRV_ID)
   }

@@ -10,5 +10,5 @@ export interface Survey {
     SystemType: number,
     SURVEY_STATUS_AR: string,
     SURVEY_STATUS_EN: string,
-    SurveyPeriods: string;
+    SurveyPeriods: any;
 }

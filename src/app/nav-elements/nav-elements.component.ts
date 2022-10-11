@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { DashboardService } from '../services/dashboard.service';
 import { Subscription } from 'rxjs';
@@ -17,6 +17,7 @@ export class NavElementsComponent implements OnInit {
   dashboardBtnSubscripe: Subscription;
   surveyNameSubsciption: Subscription;
   dashboardBtnState: boolean = true;
+  @Output() onToggleView = new EventEmitter();
 
   constructor(private dashboardService:DashboardService, public dashboardDialog:MatDialog) {
     this.dashboardBtnSubscripe = this.dashboardService
@@ -49,10 +50,8 @@ export class NavElementsComponent implements OnInit {
     });
   }
 
-  onClickGrid(){
+  onIconClick(view:string){
     this.viewBtnState = !this.viewBtnState;
-  }
-  onClickList(){
-    this.viewBtnState = !this.viewBtnState;
+    this.onToggleView.emit(view);
   }
 }

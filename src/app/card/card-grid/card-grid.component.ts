@@ -1,17 +1,17 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Survey } from '../survey';
-import { SurveysService } from '../services/surveys.service';
-import { CardItemComponent } from './card-item/card-item.component';
-import { DashboardService } from '../services/dashboard.service';
+import { Survey } from '../../survey';
+import { SurveysService } from '../../services/surveys.service';
+import { CardItemComponent } from '../card-item/card-item.component';
+import { DashboardService } from '../../services/dashboard.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-card-list',
-  templateUrl: './card-list.component.html',
-  styleUrls: ['./card-list.component.css']
+  selector: 'app-card-grid',
+  templateUrl: './card-grid.component.html',
+  styleUrls: ['./card-grid.component.css']
 })
 export class CardListComponent implements OnInit {
-  surveys: Survey;
+  surveys: Survey[];
   selectedComponent;
   dashboardBtnStatus: boolean = true;
   dashboardSubscription: Subscription;
@@ -26,7 +26,13 @@ export class CardListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.surveyService.getSurvery().subscribe((surveys) => this.surveys = surveys[0])
+
+    this.surveyService.getSurvery().subscribe((surveys) => {
+      this.surveys = surveys
+      this.surveys.forEach(item => {
+        item.SurveyPeriods = JSON.parse(item.SurveyPeriods)
+      })
+    })
     
     this.surveyNameSubscription = this.dashboardService
     .onSurveyNameChange()
