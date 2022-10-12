@@ -1,5 +1,5 @@
 <div class="card-list-container" fxLayout="row wrap">
-<div fxLayout="row wrap" *ngFor="let survey of surveys" fxLayoutGap="13px  grid">
+  <div fxLayout="row wrap" *ngFor="let survey of gridSurveys" fxLayoutGap="13px  grid">
     <div fxFlex="25%">
       <app-card-item #cardlists [surveyItem]="survey" (cardClicked)="cardSelected($event)"></app-card-item>
     </div>

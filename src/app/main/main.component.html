@@ -1,6 +1,5 @@
 <div class="cards-container">
     <app-nav-elements (onToggleView)="toggleView($event)"></app-nav-elements>
-    
-    <app-card-grid *ngIf="viewType === 'grid'"></app-card-grid>
-    <app-card-table *ngIf="viewType === 'list'"></app-card-table>
+
+    <app-cards [viewTypes]="viewType"></app-cards>
 </div>

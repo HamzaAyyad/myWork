@@ -1,34 +1,37 @@
 <div class="nav-container" fxLayout="row wrap" fxLayoutAlign="space-between start">
 
-<p fxFlex="100%" class="info-tip"><fa-icon class="info-color" [icon]="circleInfo"></fa-icon>
-    <span class="info-color"> Information:</span> Select Template to Continue 
-    </p><mat-icon class="x-mark info-color">close</mat-icon>
+  <p fxFlex="100%" class="info-tip">
+    <fa-icon class="info-color" [icon]="circleInfo"></fa-icon>
+    <span class="info-color"> Information:</span> Select Template to Continue
+  </p>
+  <mat-icon class="x-mark info-color">close</mat-icon>
 
-    <mat-tab-group [color]="'accent'" style="margin-left: 15px;">
-      <mat-tab label="Published"></mat-tab>
-      <mat-tab label="Expired"></mat-tab>
-      <mat-tab label="Closed"></mat-tab>
-      <mat-tab label="All Surveys"></mat-tab>
-    </mat-tab-group>
-    
-    
-    <span style="margin-right: 15px; margin-top: -5px;">
-      <button mat-raised-button [color]="'accent'" [disabled]="dashboardBtnState"
-      (click)="openDashboardDialog()">Go to Dashboard</button>
-      <div style="display: inline;">
-        <input type="text" name="search" id="search" placeholder="Search survey name">
-        <mat-icon class="search-icon">search</mat-icon>
-      </div>
-      <button mat-stroked-button [color]="'accent'" class="filter-button">Filter</button></span>
+  <mat-tab-group [color]="'accent'" style="margin-left: 15px;">
+    <mat-tab label="Published"></mat-tab>
+    <mat-tab label="Expired"></mat-tab>
+    <mat-tab label="Closed"></mat-tab>
+    <mat-tab label="All Surveys"></mat-tab>
+  </mat-tab-group>
+
+
+  <span style="margin-right: 15px; margin-top: -5px;">
+    <button mat-raised-button [color]="'accent'" [disabled]="dashboardBtnState" (click)="openDashboardDialog()">Go to
+      Dashboard</button>
+    <div style="display: inline;">
+      <input type="text" name="search" id="search" placeholder="Search survey name">
+      <mat-icon class="search-icon">search</mat-icon>
     </div>
+    <button mat-stroked-button [color]="'accent'" class="filter-button">Filter</button>
+  </span>
+</div>
 
-    <span class="view-icons">
-    <button mat-icon-button (click)="onIconClick('grid')">
-      <mat-icon [ngClass]="{'view-icon-not-active': viewBtnState,
+<span class="view-icons">
+  <button mat-icon-button (click)="onIconClick('grid')">
+    <mat-icon [ngClass]="{'view-icon-not-active': viewBtnState,
       'view-icon-active': !viewBtnState}">view_module</mat-icon>
-    </button>
-    <button mat-icon-button id="view-list-icon" (click)="onIconClick('list')">
-      <mat-icon [ngClass]="{'view-icon-not-active': !viewBtnState,
+  </button>
+  <button mat-icon-button id="view-list-icon" (click)="onIconClick('list')">
+    <mat-icon [ngClass]="{'view-icon-not-active': !viewBtnState,
       'view-icon-active': viewBtnState}">view_list</mat-icon>
-    </button>
-    </span>
+  </button>
+</span>

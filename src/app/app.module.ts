@@ -22,13 +22,14 @@ import { MatSortModule } from '@angular/material/sort';
 
 
 import { AppComponent } from './app.component';
-import { CardListComponent } from './card/card-grid/card-grid.component';
-import { CardItemComponent } from './card/card-item/card-item.component';
+import { CardListComponent } from './cards/card-grid/card-grid.component';
+import { CardItemComponent } from './cards/card-item/card-item.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { NavElementsComponent } from './nav-elements/nav-elements.component';
 import { DashboardDialogComponent } from './nav-elements/dashboard-dialog/dashboard-dialog.component';
-import { CardTableComponent } from './card/card-table/card-table.component';
+import { CardTableComponent } from './cards/card-table/card-table.component';
+import { CardsComponent } from './cards/cards.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CardTableComponent } from './card/card-table/card-table.component';
     NavElementsComponent,
     DashboardDialogComponent,
     CardTableComponent,
+    CardsComponent,
   ],
   imports: [
     BrowserModule,

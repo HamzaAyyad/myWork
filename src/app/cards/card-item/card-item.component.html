@@ -1,0 +1,36 @@
+<mat-card class="card" id="{{styleID}}"
+[ngClass]="{'card-Published': surveyItem.SURVEY_STATUS_EN === 'Published',
+'card-Expired': surveyItem.SURVEY_STATUS_EN === 'Expired',
+'card-Closed': surveyItem.SURVEY_STATUS_EN === 'Closed'}">
+    <div (click)="onCardSelect()">
+
+
+        <mat-card-title>
+            <ng-container [ngSwitch]="surveyItem.SURVEY_STATUS_EN">
+                <fa-icon *ngSwitchCase="'Published'" [icon]="faCheck" style="color:rgb(102, 202, 155)"></fa-icon>
+                <mat-icon *ngSwitchCase="'Expired'" style="color: grey;">alarm</mat-icon>
+                <mat-icon *ngSwitchCase="'Closed'" style="color: grey;">lock</mat-icon>
+            </ng-container>
+
+        </mat-card-title>
+
+        <mat-card-content>{{surveyItem.SurveyName}}</mat-card-content>
+    </div>
+    <mat-card-footer style="border-top: 1px solid lightgrey;">
+        <mat-form-field *ngIf="periodsCount > 1; else onePeriod" [color]="'accent'" [floatLabel]="'never'"
+            class="survey-periods">
+            <mat-select placeholder="Select Period">
+                <div>
+                    <mat-option *ngFor="let surveyPeriod of surveyItem.SurveyPeriods"
+                        [value]="surveyPeriod.START_DATE - surveyPeriod.END_DATE">
+                        {{surveyPeriod.START_DATE | date:'dd/MM/yyyy'}} - {{surveyPeriod.END_DATE | date:'dd/MM/yyyy'}}
+                    </mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>
+        <ng-template #onePeriod>
+            <p class="surv-period">{{surveyItem.SurveyPeriods[0].START_DATE | date:'dd/MM/yyyy'}} -
+                {{surveyItem.SurveyPeriods[0].END_DATE | date:'dd/MM/yyyy'}}</p>
+        </ng-template>
+    </mat-card-footer>
+</mat-card>

@@ -12,27 +12,27 @@ import { DashboardDialogComponent } from './dashboard-dialog/dashboard-dialog.co
 })
 export class NavElementsComponent implements OnInit {
   circleInfo = faInfoCircle;
-  viewBtnState:boolean = false;
+  viewBtnState: boolean = false;
   dashboardSurveyName: string;
   dashboardBtnSubscripe: Subscription;
   surveyNameSubsciption: Subscription;
   dashboardBtnState: boolean = true;
   @Output() onToggleView = new EventEmitter();
 
-  constructor(private dashboardService:DashboardService, public dashboardDialog:MatDialog) {
+  constructor(private dashboardService: DashboardService, public dashboardDialog: MatDialog) {
     this.dashboardBtnSubscripe = this.dashboardService
-    .onDashBtnToggle()
-    .subscribe(value => this.dashboardBtnState = value);
+      .onDashBtnToggle()
+      .subscribe(value => this.dashboardBtnState = value);
 
     this.surveyNameSubsciption = this.dashboardService
-    .onSurveyNameChange()
-    .subscribe(value => this.dashboardSurveyName = value)
-   }
+      .onSurveyNameChange()
+      .subscribe(value => this.dashboardSurveyName = value)
+  }
 
   ngOnInit(): void {
   }
-  
-  openDashboardDialog(){
+
+  openDashboardDialog() {
     const dialogRef = this.dashboardDialog.open(DashboardDialogComponent, {
       width: '300px',
       data: {},
@@ -50,7 +50,7 @@ export class NavElementsComponent implements OnInit {
     });
   }
 
-  onIconClick(view:string){
+  onIconClick(view: string) {
     this.viewBtnState = !this.viewBtnState;
     this.onToggleView.emit(view);
   }

@@ -1,0 +1,22 @@
+.card-table {
+    width: 96%;
+    margin: auto;
+}
+
+.card-icon {
+    margin-left: -20px;
+    font-size: 18px;
+    position: absolute;
+}
+
+.table {
+    width: 100%;
+}
+
+.mat-row.hovered {
+    background: #eee;
+}
+
+.mat-row.highlighted {
+    background: lightgreen;
+}

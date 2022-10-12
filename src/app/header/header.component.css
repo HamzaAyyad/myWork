@@ -1,34 +1,34 @@
 .toolbar-spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
 
-  mat-toolbar {
-    background-color: white;
-    color: black;
-  }
+mat-toolbar {
+  background-color: white;
+  color: black;
+}
 
-  .toolbar-button {
-    background-color: lightskyblue;
-    margin: 5px 5px;
-  }
+.toolbar-button {
+  background-color: lightskyblue;
+  margin: 5px 5px;
+}
 
-  mat-toolbar div {
-    margin: 10px 10px;
-  }
+mat-toolbar div {
+  margin: 10px 10px;
+}
 
-   div p.user-account {
-    display: inline;
-    font-weight: 400;
-  }
+div p.user-account {
+  display: inline;
+  font-weight: 400;
+}
 
-  span.material-icons {
-    margin-top: 10px;
-  }
+span.material-icons {
+  margin-top: 10px;
+}
 
-  span.user-account {
-    font-weight: 400;
-  }
+span.user-account {
+  font-weight: 400;
+}
 
-  header {
-    margin-bottom: 10px ;
-  }
+header {
+  margin-bottom: 10px;
+}
