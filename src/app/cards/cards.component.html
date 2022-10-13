@@ -1,2 +1,2 @@
-<app-card-grid *ngIf="viewTypes === 'grid'" [gridSurveys]="surveys"></app-card-grid>
-<app-card-table *ngIf="viewTypes === 'list'" [tableSurveys]="surveys"></app-card-table>
+<app-card-grid  [hidden]="!viewTypes" [gridSurveys]="filterdSurveys"></app-card-grid>
+<app-card-table [hidden]="viewTypes" [tableSurveys]="filterdSurveys"></app-card-table>

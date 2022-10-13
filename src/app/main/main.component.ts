@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  viewType: string = 'grid';
+  viewType: boolean = true;
 
   constructor() { }
 
@@ -15,7 +15,11 @@ export class MainComponent implements OnInit {
 
   toggleView(eve) {
     console.log(eve)
-    this.viewType = eve;
+    if (eve === 'grid') {
+      this.viewType = true;
+    } else {
+      this.viewType = false;
+    }
   }
 
 }

@@ -23,14 +23,14 @@
                 <div>
                     <mat-option *ngFor="let surveyPeriod of surveyItem.SurveyPeriods"
                         [value]="surveyPeriod.START_DATE - surveyPeriod.END_DATE">
-                        {{surveyPeriod.START_DATE | date:'dd/MM/yyyy'}} - {{surveyPeriod.END_DATE | date:'dd/MM/yyyy'}}
+                        {{surveyPeriod.START_DATE}} - {{surveyPeriod.END_DATE}}
                     </mat-option>
                 </div>
             </mat-select>
         </mat-form-field>
         <ng-template #onePeriod>
-            <p class="surv-period">{{surveyItem.SurveyPeriods[0].START_DATE | date:'dd/MM/yyyy'}} -
-                {{surveyItem.SurveyPeriods[0].END_DATE | date:'dd/MM/yyyy'}}</p>
+            <p class="surv-period">{{surveyItem.SurveyPeriods[0].START_DATE }} -
+                {{surveyItem.SurveyPeriods[0].END_DATE }}</p>
         </ng-template>
     </mat-card-footer>
 </mat-card>

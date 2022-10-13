@@ -10,9 +10,7 @@
 }
 
 .card-Published:hover {
-    border-bottom: 2px solid rgb(102, 202, 155);
-    border-left: 2px solid rgb(102, 202, 155);
-    border-right: 2px solid rgb(102, 202, 155);
+    box-shadow: 0 0 11px rgba(102, 202, 155);
     transition: all 90ms linear;
     cursor: pointer;
 }
@@ -30,9 +28,7 @@
 }
 
 .card-Expired:hover {
-    border-bottom: 2px solid grey;
-    border-left: 2px solid grey;
-    border-right: 2px solid grey;
+    box-shadow: 0 0 11px grey;
     transition: all 90ms linear;
     cursor: pointer;
 }
@@ -50,9 +46,7 @@
 }
 
 .card-Closed:hover {
-    border-bottom: 2px solid grey;
-    border-left: 2px solid grey;
-    border-right: 2px solid grey;
+    box-shadow: 0 0 14px grey;
     transition: all 90ms linear;
     cursor: pointer;
 }

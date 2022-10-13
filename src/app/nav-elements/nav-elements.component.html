@@ -6,7 +6,7 @@
   </p>
   <mat-icon class="x-mark info-color">close</mat-icon>
 
-  <mat-tab-group [color]="'accent'" style="margin-left: 15px;">
+  <mat-tab-group (selectedTabChange)="tabChange($event)" [color]="'accent'" style="margin-left: 15px;">
     <mat-tab label="Published"></mat-tab>
     <mat-tab label="Expired"></mat-tab>
     <mat-tab label="Closed"></mat-tab>
@@ -17,21 +17,45 @@
   <span style="margin-right: 15px; margin-top: -5px;">
     <button mat-raised-button [color]="'accent'" [disabled]="dashboardBtnState" (click)="openDashboardDialog()">Go to
       Dashboard</button>
+
     <div style="display: inline;">
-      <input type="text" name="search" id="search" placeholder="Search survey name">
+      <input type="text" name="search" id="search" placeholder="Search survey name" [(ngModel)]="searchText"
+        (input)="searchName()">
       <mat-icon class="search-icon">search</mat-icon>
     </div>
-    <button mat-stroked-button [color]="'accent'" class="filter-button">Filter</button>
+
+    <button mat-stroked-button [color]="'accent'" class="filter-button" (click)="filterMenu=!filterMenu">Filter</button>
+    <div [fxHide]="filterMenu" class="filter-menu" fxLayout="row grid">
+      <mat-form-field appearance="outline" fxFlex="80%">
+        <mat-label>Choose the start date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="80%">
+        <mat-label>Choose the end date</mat-label>
+        <input matInput [matDatepicker]="endPicker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-stroked-button [color]="'accent'" class="filter-options filter-button">Cancel</button>
+      <button mat-raised-button [color]="'accent'">apply</button>
+    </div>
+
   </span>
 </div>
 
 <span class="view-icons">
   <button mat-icon-button (click)="onIconClick('grid')">
-    <mat-icon [ngClass]="{'view-icon-not-active': viewBtnState,
-      'view-icon-active': !viewBtnState}">view_module</mat-icon>
+    <mat-icon [ngClass]="{'view-icon-not-active': !viewBtnState,
+      'view-icon-active': viewBtnState}">view_module</mat-icon>
   </button>
   <button mat-icon-button id="view-list-icon" (click)="onIconClick('list')">
-    <mat-icon [ngClass]="{'view-icon-not-active': !viewBtnState,
-      'view-icon-active': viewBtnState}">view_list</mat-icon>
+    <mat-icon [ngClass]="{'view-icon-not-active': viewBtnState,
+      'view-icon-active': !viewBtnState}">view_list</mat-icon>
   </button>
 </span>

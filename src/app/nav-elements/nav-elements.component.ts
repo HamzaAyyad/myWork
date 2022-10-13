@@ -12,8 +12,9 @@ import { DashboardDialogComponent } from './dashboard-dialog/dashboard-dialog.co
 })
 export class NavElementsComponent implements OnInit {
   circleInfo = faInfoCircle;
-  viewBtnState: boolean = false;
-  dashboardSurveyName: string;
+  viewBtnState: boolean = true;
+  filterMenu: boolean = true;
+  searchText:string;
   dashboardBtnSubscripe: Subscription;
   surveyNameSubsciption: Subscription;
   dashboardBtnState: boolean = true;
@@ -23,13 +24,20 @@ export class NavElementsComponent implements OnInit {
     this.dashboardBtnSubscripe = this.dashboardService
       .onDashBtnToggle()
       .subscribe(value => this.dashboardBtnState = value);
-
-    this.surveyNameSubsciption = this.dashboardService
-      .onSurveyNameChange()
-      .subscribe(value => this.dashboardSurveyName = value)
   }
 
   ngOnInit(): void {
+  }
+
+  tabChange(event) {
+    // console.log(event.tab.textLabel)
+    this.dashboardBtnState = true;
+    this.dashboardService.changeTab(event.tab.textLabel)
+  }
+
+  searchName() {
+    // console.log(this.searchText)
+    this.dashboardService.searchName(this.searchText)
   }
 
   openDashboardDialog() {
@@ -40,10 +48,7 @@ export class NavElementsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(`My name is ${result}`);
         this.dashboardService.changeSurveyName(String(result));
-        console.log(this.dashboardSurveyName)
-
       } else {
         alert('No new name added')
       }
@@ -51,7 +56,11 @@ export class NavElementsComponent implements OnInit {
   }
 
   onIconClick(view: string) {
-    this.viewBtnState = !this.viewBtnState;
+    if (view === 'grid') {
+      this.viewBtnState = true;
+    } else {
+      this.viewBtnState = false;
+    }
     this.onToggleView.emit(view);
   }
 }
