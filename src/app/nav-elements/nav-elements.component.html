@@ -24,11 +24,12 @@
       <mat-icon class="search-icon">search</mat-icon>
     </div>
 
-    <button mat-stroked-button [color]="'accent'" class="filter-button" (click)="filterMenu=!filterMenu">Filter</button>
-    <div [fxHide]="filterMenu" class="filter-menu" fxLayout="row grid">
+    <button mat-stroked-button [color]="'accent'" class="filter-button" id="filterButton"
+      (click)="toggleFilterMenu()">Filter</button>
+    <div [fxHide]="filterMenuToggle" class="filter-menu" fxLayout="row grid" id='filterMenu'>
       <mat-form-field appearance="outline" fxFlex="80%">
         <mat-label>Choose the start date</mat-label>
-        <input matInput [matDatepicker]="picker">
+        <input matInput [matDatepicker]="picker" [(ngModel)]="startDateInput">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
@@ -36,14 +37,15 @@
 
       <mat-form-field appearance="outline" fxFlex="80%">
         <mat-label>Choose the end date</mat-label>
-        <input matInput [matDatepicker]="endPicker">
+        <input matInput [matDatepicker]="endPicker" [(ngModel)]="endDateInput">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
       </mat-form-field>
 
-      <button mat-stroked-button [color]="'accent'" class="filter-options filter-button">Cancel</button>
-      <button mat-raised-button [color]="'accent'">apply</button>
+      <button mat-stroked-button [color]="'accent'" class="filter-options filter-button"
+        (click)="toggleFilterMenu()">Cancel</button>
+      <button mat-raised-button [color]="'accent'" (click)="filterDate()">apply</button>
     </div>
 
   </span>

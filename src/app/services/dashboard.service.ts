@@ -14,11 +14,14 @@ export class DashboardService {
   private surveyName: string;
   private surveyNameSubject = new Subject<string>();
 
-  private tabName:string = 'Published';
+  private tabName: string = 'Published';
   private tabNameSubject = new Subject<string>();
-  
-  private searchText:string = '';
+
+  private searchText: string = '';
   private searchTextSubject = new Subject<string>();
+
+  private DateText: string[] = []
+  private DateSubject = new Subject<string[]>()
 
   constructor() {
   }
@@ -44,7 +47,7 @@ export class DashboardService {
     return this.idSubject.asObservable();
   }
 
-  changeTab(tabName:string){
+  changeTab(tabName: string) {
     this.tabName = tabName;
     this.tabNameSubject.next(this.tabName);
   }
@@ -53,13 +56,25 @@ export class DashboardService {
     return this.tabNameSubject.asObservable()
   }
 
-  searchName(searchText:string){
+  searchName(searchText: string) {
     this.searchText = searchText;
     this.searchTextSubject.next(this.searchText);
   }
 
   onSearchName(): Observable<string> {
     return this.searchTextSubject.asObservable()
+  }
+
+  dateChange(startDate: string, endDate: string) {
+    this.DateText[0] = startDate
+    this.DateText[1] = endDate
+    console.log(this.DateText[0])
+    console.log(this.DateText[1])
+    this.DateSubject.next(this.DateText);
+  }
+
+  onDateChange(): Observable<string[]> {
+    return this.DateSubject.asObservable();
   }
 
   onDashBtnToggle(): Observable<boolean> {

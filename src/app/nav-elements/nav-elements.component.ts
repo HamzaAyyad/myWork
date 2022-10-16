@@ -4,6 +4,8 @@ import { DashboardService } from '../services/dashboard.service';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DashboardDialogComponent } from './dashboard-dialog/dashboard-dialog.component';
+import { formatDate } from '@angular/common';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-nav-elements',
@@ -13,14 +15,21 @@ import { DashboardDialogComponent } from './dashboard-dialog/dashboard-dialog.co
 export class NavElementsComponent implements OnInit {
   circleInfo = faInfoCircle;
   viewBtnState: boolean = true;
-  filterMenu: boolean = true;
-  searchText:string;
+  filterMenuToggle: boolean = true;
+  filterButtinClick: boolean = false;
+  calenderHeader:any;
+  searchText: string;
+  startDateInput: string = '';
+  endDateInput: string = '';
   dashboardBtnSubscripe: Subscription;
-  surveyNameSubsciption: Subscription;
   dashboardBtnState: boolean = true;
   @Output() onToggleView = new EventEmitter();
 
-  constructor(private dashboardService: DashboardService, public dashboardDialog: MatDialog) {
+
+  constructor(
+    private dashboardService: DashboardService,
+    public dashboardDialog: MatDialog,
+    private notificationService: NotificationService ) {
     this.dashboardBtnSubscripe = this.dashboardService
       .onDashBtnToggle()
       .subscribe(value => this.dashboardBtnState = value);
@@ -30,13 +39,11 @@ export class NavElementsComponent implements OnInit {
   }
 
   tabChange(event) {
-    // console.log(event.tab.textLabel)
     this.dashboardBtnState = true;
     this.dashboardService.changeTab(event.tab.textLabel)
   }
 
   searchName() {
-    // console.log(this.searchText)
     this.dashboardService.searchName(this.searchText)
   }
 
@@ -50,9 +57,31 @@ export class NavElementsComponent implements OnInit {
       if (result) {
         this.dashboardService.changeSurveyName(String(result));
       } else {
-        alert('No new name added')
+        this.notificationService.showInfo('No new name added')
       }
     });
+  }
+
+  filterDate() {
+
+    if (this.startDateInput || this.endDateInput) {
+      this.notificationService.showError("Invalid date")
+    } else {
+      if (this.startDateInput < this.endDateInput) {
+        this.filterMenuToggle = !this.filterMenuToggle;
+        this.dashboardService.dateChange(formatDate(this.startDateInput, 'MM/dd/yyyy', 'en-US')
+          , formatDate(this.endDateInput, 'MM/dd/yyyy', 'en-US'))
+      } else {
+        this.notificationService.showError('End date should be after Start Date')
+      }
+    }
+    
+  }
+
+  toggleFilterMenu() {
+    this.filterMenuToggle = !this.filterMenuToggle
+    this.startDateInput = '';
+    this.endDateInput = '';
   }
 
   onIconClick(view: string) {

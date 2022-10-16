@@ -21,6 +21,8 @@ export class CardsComponent implements OnInit {
   tabNameSubscription: Subscription
   searchName: string = ''
   searchNameSubscription: Subscription
+  date: string[] = []
+  DateSub: Subscription;
   @Input() viewTypes: boolean;
 
   constructor(private surveyService: SurveysService, private dashboardService: DashboardService) {
@@ -30,66 +32,89 @@ export class CardsComponent implements OnInit {
       this.surveys.forEach(item => {
         item.SurveyPeriods = JSON.parse(item.SurveyPeriods)
         item.SurveyPeriods.forEach(period => {
-          period.START_DATE = formatDate(period.START_DATE,'MM/dd/yyyy','en-US')
-          period.END_DATE = formatDate(period.END_DATE,'MM/dd/yyyy','en-US')
+          period.START_DATE = formatDate(period.START_DATE, 'MM/dd/yyyy', 'en-US')
+          period.END_DATE = formatDate(period.END_DATE, 'MM/dd/yyyy', 'en-US')
         })
       })
-      
+
       this.tempSurveys = this.surveys
       this.filterdSurveys = this.tempSurveys.filter(survey => {
-        return this.filterSurveys(survey)
+        return this.surveyFilter(survey)
       })
-      console.log(this.filterdSurveys)
     })
-    
+
   }
-  
+
   ngOnInit(): void {
-    
+
     this.idSubscription = this.dashboardService.updateId().subscribe(index => this.id = index)
     this.cardsSubscription = this.dashboardService
-    .onSurveyNameChange()
-    .subscribe(value => this.surveys[this.surveys
-      .findIndex((name) => name.SRV_ID === this.id)].SurveyName = value)
+      .onSurveyNameChange()
+      .subscribe(value => this.surveys[this.surveys
+        .findIndex((name) => name.SRV_ID === this.id)].SurveyName = value)
 
-      this.tabNameSubscription = this.dashboardService.onTabChange().subscribe(value => {this.tabName = value;
-        this.filterdSurveys = this.tempSurveys.filter(survey => {
-          return this.filterSurveys(survey)
-        })
-        console.log(this.filterdSurveys)
+    this.tabNameSubscription = this.dashboardService.onTabChange().subscribe(value => {
+      this.tabName = value;
+      this.filterdSurveys = this.tempSurveys.filter(survey => {
+        return this.surveyFilter(survey)
       })
+    })
 
-      this.searchNameSubscription = this.dashboardService.onSearchName().subscribe(value => {this.searchName = value;
-        this.filterdSurveys = this.tempSurveys.filter(survey => {
-          return this.filterSurveys(survey)
-        })
-        console.log(this.filterdSurveys)
+    this.searchNameSubscription = this.dashboardService.onSearchName().subscribe(value => {
+      this.searchName = value;
+      this.filterdSurveys = this.tempSurveys.filter(survey => {
+        return this.surveyFilter(survey)
       })
-      
+    })
 
-    }
-    
-  filterSurveys(survey:Survey){
+    this.DateSub = this.dashboardService.onDateChange().subscribe(value => {
+      this.date = value;
+      this.filterdSurveys = this.tempSurveys.filter(survey => {
+        return this.surveyFilter(survey)
+      })
+    })
+
+
+  }
+
+  surveyFilter(survey: Survey) {
     if (this.tabName === 'All Surveys') {
       console.log('all serveys')
       return this.filterByName(survey)
-      // return 
     } else {
       let surveyStatus = survey.SURVEY_STATUS_EN
-      switch(this.tabName){
-        case surveyStatus : return this.filterByName(survey)
-        case surveyStatus : return this.filterByName(survey)
-        case surveyStatus : return this.filterByName(survey)
+      switch (this.tabName) {
+        case surveyStatus: return this.filterByName(survey)
+        case surveyStatus: return this.filterByName(survey)
+        case surveyStatus: return this.filterByName(survey)
       }
-       return
+      return
     }
   }
 
-  filterByName(survey: Survey){
+  filterByName(survey: Survey) {
     if (this.searchName === '') {
-      return survey
+      return this.filterByDate(survey)
     } else {
       if (survey.SurveyName.includes(this.searchName)) {
+        return this.filterByDate(survey)
+      }
+    }
+  }
+
+  filterByDate(survey: Survey) {
+    let dateFound = false;
+    if (this.date.length === 0) {
+      return survey
+    } else {
+      survey.SurveyPeriods.forEach(period => {
+        if (period.START_DATE === this.date[0] && period.END_DATE === this.date[1]) {
+          dateFound = true
+        } else {
+          dateFound = false;
+        }
+      })
+      if (dateFound) {
         return survey
       }
     }

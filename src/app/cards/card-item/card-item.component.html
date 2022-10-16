@@ -14,7 +14,7 @@
 
         </mat-card-title>
 
-        <mat-card-content>{{surveyItem.SurveyName}}</mat-card-content>
+        <mat-card-content><span>{{surveyItem.SurveyName}}</span></mat-card-content>
     </div>
     <mat-card-footer style="border-top: 1px solid lightgrey;">
         <mat-form-field *ngIf="periodsCount > 1; else onePeriod" [color]="'accent'" [floatLabel]="'never'"

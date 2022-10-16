@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -55,6 +56,11 @@ import { CardsComponent } from './cards/cards.component';
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 7000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true
+    }) ,
 
     MatToolbarModule,
     MatIconModule,
