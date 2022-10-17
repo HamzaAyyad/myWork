@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Survey } from 'src/app/survey';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
+import { AccessibilityService } from 'src/app/services/accessibility.service';
 
 
 @Component({
@@ -16,12 +17,31 @@ export class CardItemComponent implements OnInit {
   selected: boolean = false;
   styleID: string;
   periodsCount: number;
+  textSizeInitial:string;
+  textSize:string;
+  textBtnState
 
-  constructor() { }
+  constructor(private accessService:AccessibilityService) { }
 
   ngOnInit(): void {
     this.periodsCount = this.surveyItem.SurveyPeriods.length;
     this.styleID = String(this.surveyItem.SRV_ID)
+
+    this.textSizeInitial = localStorage.getItem('textSize')
+    if (this.textSizeInitial === 'normal') {
+      this.textBtnState = false
+    } else {
+      this.textBtnState = true
+    }
+
+    this.accessService.onTextSizeChange().subscribe(value => {
+      this.textSize = value;
+      if (this.textSize === 'normal') {
+        this.textBtnState = false
+      } else {
+        this.textBtnState = true
+      }
+    })
   }
 
   onCardSelect() {

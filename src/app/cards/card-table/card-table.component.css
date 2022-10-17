@@ -3,6 +3,25 @@
     margin: auto;
 }
 
+.fs-lg {
+    font-size: 25px;
+}
+
+.surv-periods {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: -30px;
+    font-size: 15px;
+}
+
+.surv-periods-lg {
+    font-size: 23px;
+    margin: 0px auto;
+}
+
+
 .card-icon {
     margin-left: -20px;
     font-size: 18px;

@@ -1,7 +1,8 @@
 <mat-card class="card" id="{{styleID}}"
 [ngClass]="{'card-Published': surveyItem.SURVEY_STATUS_EN === 'Published',
 'card-Expired': surveyItem.SURVEY_STATUS_EN === 'Expired',
-'card-Closed': surveyItem.SURVEY_STATUS_EN === 'Closed'}">
+'card-Closed': surveyItem.SURVEY_STATUS_EN === 'Closed',
+'card-lg': textBtnState}">
     <div (click)="onCardSelect()">
 
 
@@ -14,12 +15,12 @@
 
         </mat-card-title>
 
-        <mat-card-content><span>{{surveyItem.SurveyName}}</span></mat-card-content>
+        <mat-card-content [ngClass]="{'fs-lg': textBtnState}"><p>{{surveyItem.SurveyName}}</p></mat-card-content>
     </div>
     <mat-card-footer style="border-top: 1px solid lightgrey;">
         <mat-form-field *ngIf="periodsCount > 1; else onePeriod" [color]="'accent'" [floatLabel]="'never'"
-            class="survey-periods">
-            <mat-select placeholder="Select Period">
+            class="survey-periods" [ngClass]="{'survey-periods-lg': textBtnState}">
+            <mat-select placeholder="Select Period" >
                 <div>
                     <mat-option *ngFor="let surveyPeriod of surveyItem.SurveyPeriods"
                         [value]="surveyPeriod.START_DATE - surveyPeriod.END_DATE">

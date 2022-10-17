@@ -1,18 +1,40 @@
 .nav-container {
-  background-color: white;
   margin: 5px;
   position: relative;
+  font-size: 14px;
+}
+
+.nav-container-dark {
+  color: white;
+}
+
+.input-search {
+  font-size: inherit;
+}
+
+.input-search::placeholder {
+  font-size: inherit;
+}
+
+.dashboard-btn-dark {
+  background-color: rgb(102, 202, 155);
+}
+
+.dashboard-btn-dark:disabled {
+  background-color: lightslategrey;
 }
 
 .info-tip {
   background-color: lightcyan;
   margin: 10px;
   padding: 7px;
+  color: black;
 }
 
 .info-color {
   color: cornflowerblue;
 }
+
 
 .x-mark {
   position: absolute;
@@ -42,14 +64,14 @@
 }
 
 .filter-button {
-  font-size: 9;
   font-weight: 400;
+  font-size: inherit;
   color: rgb(102, 202, 155) !important;
   border: 1px solid rgb(102, 202, 155);
 }
 
 .filter-menu {
-  background: white;
+  background-color: white;
   border-radius: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -63,14 +85,31 @@
   z-index: 10;
 }
 
+
+.filter-menu-dark {
+  background-color: white
+}
+
+.filter-menu-lg {
+  width: 310px;
+  height: 300px;
+}
+
 .filter-options {
   margin-right: 10px;
+  font-size: inherit;
 }
 
 .view-icons {
   display: flex;
   justify-content: flex-end;
   margin: -17px 25px 10px 25px;
+}
+
+.access-icons {
+  display: flex;
+  justify-content: flex-start;
+  margin: -57px 25px 10px 25px;
 }
 
 .view-icons mat-icon {
@@ -85,7 +124,7 @@
 }
 
 .view-icon-active {
-  background-color: black;
+  background-color: rgb(102, 202, 155);
   color: white;
 }
 
@@ -110,10 +149,20 @@
   background-color: rgb(102, 202, 155);
 }
 
+::ng-deep span .mat-raised-button.mat-accent:disabled {
+  background-color: lightgray;
+}
+
 ::ng-deep .mat-tab-label {
   height: 27px !important;
   min-height: 5px !important;
   margin: 3px !important;
   width: 90px !important;
   min-width: 5px !important;
+  font-size: inherit;
+  color: inherit;
+}
+
+.fs {
+  font-size: 18px;
 }

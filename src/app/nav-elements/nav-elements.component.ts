@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DashboardDialogComponent } from './dashboard-dialog/dashboard-dialog.component';
 import { formatDate } from '@angular/common';
 import { NotificationService } from '../services/notification.service';
+import { AccessibilityService } from '../services/accessibility.service';
 
 @Component({
   selector: 'app-nav-elements',
@@ -17,25 +18,52 @@ export class NavElementsComponent implements OnInit {
   viewBtnState: boolean = true;
   filterMenuToggle: boolean = true;
   filterButtinClick: boolean = false;
-  calenderHeader:any;
+  calenderHeader: any;
   searchText: string;
   startDateInput: string = '';
   endDateInput: string = '';
   dashboardBtnSubscripe: Subscription;
   dashboardBtnState: boolean = true;
+  textSize: string;
+  textBtnState: boolean = false;
+  darkBtnState: boolean = false;
+  dialogHeight:string;
+  dialogWidth:string;
+  darkMode:string;
   @Output() onToggleView = new EventEmitter();
 
 
   constructor(
     private dashboardService: DashboardService,
     public dashboardDialog: MatDialog,
-    private notificationService: NotificationService ) {
+    private notificationService: NotificationService,
+    private accessSevice: AccessibilityService) {
+
     this.dashboardBtnSubscripe = this.dashboardService
       .onDashBtnToggle()
       .subscribe(value => this.dashboardBtnState = value);
+
   }
 
   ngOnInit(): void {
+
+    this.textSize = this.accessSevice.getKeyData('textSize');
+    if (this.textSize === 'normal') {
+      this.textBtnState = false
+      this.dialogHeight = '250px';
+      this.dialogWidth = '300px';
+    } else {
+      this.textBtnState = true
+      this.dialogHeight = '325px';
+      this.dialogWidth = '500px'
+    }
+
+    this.darkMode = this.accessSevice.getKeyData('darkMode')
+    if (this.darkMode === 'light') {
+      this.darkBtnState = false
+    } else {
+      this.darkBtnState = true
+    }
   }
 
   tabChange(event) {
@@ -49,8 +77,10 @@ export class NavElementsComponent implements OnInit {
 
   openDashboardDialog() {
     const dialogRef = this.dashboardDialog.open(DashboardDialogComponent, {
-      width: '300px',
+      width: this.dialogWidth,
+      height: this.dialogHeight,
       data: {},
+      panelClass: 'dialog-color'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -60,6 +90,7 @@ export class NavElementsComponent implements OnInit {
         this.notificationService.showInfo('No new name added')
       }
     });
+
   }
 
   filterDate() {
@@ -75,7 +106,7 @@ export class NavElementsComponent implements OnInit {
         this.notificationService.showError('End date should be after Start Date')
       }
     }
-    
+
   }
 
   toggleFilterMenu() {
@@ -91,5 +122,33 @@ export class NavElementsComponent implements OnInit {
       this.viewBtnState = false;
     }
     this.onToggleView.emit(view);
+  }
+
+  onTextBtnClick() {
+
+    if (this.textBtnState) {
+      this.accessSevice.setKey('textSize', 'normal')
+      this.textBtnState = false;
+      this.dialogHeight = '200px'
+      this.dialogWidth = '300px'
+
+    } else {
+      this.accessSevice.setKey('textSize', 'large')
+      this.textBtnState = true
+      this.dialogHeight = '325px'
+      this.dialogWidth = '500px'
+    }
+  }
+
+  onDarkBtnClick() {
+    if (this.darkBtnState) {
+      document.body.style.backgroundColor = 'rgb(245, 243, 243)'
+      this.darkBtnState = false;
+      this.accessSevice.setKey('darkMode', 'light')
+    } else {
+      document.body.style.backgroundColor = 'black'
+      this.darkBtnState = true
+      this.accessSevice.setKey('darkMode', 'dark')
+    }
   }
 }

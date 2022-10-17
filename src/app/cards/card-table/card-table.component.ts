@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
+import { AccessibilityService } from 'src/app/services/accessibility.service';
 
 @Component({
   selector: 'app-card-table',
@@ -22,13 +23,30 @@ export class CardTableComponent implements OnInit, OnChanges {
   selection = new SelectionModel<Survey>(false, []);
   dashboardSubscription: Subscription;
   tempSurveyPeriod:any;
+  textSizeInitial:string;
+  textSize:string;
+  textBtnState:boolean;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService, private accessService:AccessibilityService) { }
 
   ngOnInit(): void {
-    // console.log(this.tableSurveys)
+    this.textSizeInitial = this.accessService.getKeyData('TextSize')
+    if (this.textSize === 'normal') {
+      this.textBtnState = false
+    } else {
+      this.textBtnState = true
+    }
+
+    this.accessService.onTextSizeChange().subscribe(value => {
+      this.textSize = value;
+      if (this.textSize === 'normal') {
+        this.textBtnState = false
+      } else {
+        this.textBtnState = true
+      }
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -50,10 +68,10 @@ export class CardTableComponent implements OnInit, OnChanges {
   choosePeriod(value: any, row: any) {
     console.log(row);
     console.log(value);
-    let index = this.tableSurveys.findIndex(i => i.SRV_ID === row.SRV_ID)
-    this.tempSurveyPeriod = row.SurveyPeriods[0]
-    row.SurveyPeriods[0] = value
-    row.SurveyPeriods[index] = this.tempSurveyPeriod
+    // let index = this.tableSurveys.findIndex(i => i.SRV_ID === row.SRV_ID)
+    // this.tempSurveyPeriod = row.SurveyPeriods[0]
+    // row.SurveyPeriods[0] = value
+    // row.SurveyPeriods[index] = this.tempSurveyPeriod
     
   }
 

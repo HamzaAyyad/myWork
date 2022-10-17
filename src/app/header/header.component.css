@@ -2,6 +2,10 @@
   flex: 1 1 auto;
 }
 
+.fs-lg {
+  font-size: 25px;
+}
+
 mat-toolbar {
   background-color: white;
   color: black;

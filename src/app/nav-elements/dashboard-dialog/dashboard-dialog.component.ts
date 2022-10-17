@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AccessibilityService } from 'src/app/services/accessibility.service';
 
 
 @Component({
@@ -9,12 +10,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DashboardDialogComponent implements OnInit {
   hasError: boolean = false;
+  textSizeInitial:string
+  textSize:string
+  textBtnState:boolean;
   nameInput: string;
   dialogName: string = "";
 
   constructor(
     public dialogRef: MatDialogRef<DashboardDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private accessService:AccessibilityService
   ) { }
 
   surveyNameCheck(e) {
@@ -38,6 +43,21 @@ export class DashboardDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.textSizeInitial = this.accessService.getKeyData('textSize')
+    if (this.textSizeInitial === 'normal') {
+      this.textBtnState = false
+    } else {
+      this.textBtnState = true
+    }
+
+    this.accessService.onTextSizeChange().subscribe(value => {
+      this.textSize = value;
+      if (this.textSize === 'normal') {
+        this.textBtnState = false
+      } else {
+        this.textBtnState = true
+      }
+    })
   }
 
 }

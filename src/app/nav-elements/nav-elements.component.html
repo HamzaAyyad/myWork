@@ -1,4 +1,5 @@
-<div class="nav-container" fxLayout="row wrap" fxLayoutAlign="space-between start">
+<div class="nav-container" [ngClass]="{'fs': textBtnState,'nav-container-dark':darkBtnState}" fxLayout="row wrap"
+  fxLayoutAlign="space-between start">
 
   <p fxFlex="100%" class="info-tip">
     <fa-icon class="info-color" [icon]="circleInfo"></fa-icon>
@@ -7,7 +8,7 @@
   <mat-icon class="x-mark info-color">close</mat-icon>
 
   <mat-tab-group (selectedTabChange)="tabChange($event)" [color]="'accent'" style="margin-left: 15px;">
-    <mat-tab label="Published"></mat-tab>
+    <mat-tab class="tab-label" label="Published"></mat-tab>
     <mat-tab label="Expired"></mat-tab>
     <mat-tab label="Closed"></mat-tab>
     <mat-tab label="All Surveys"></mat-tab>
@@ -15,18 +16,20 @@
 
 
   <span style="margin-right: 15px; margin-top: -5px;">
-    <button mat-raised-button [color]="'accent'" [disabled]="dashboardBtnState" (click)="openDashboardDialog()">Go to
+    <button style="font-size: inherit;" [ngClass]="{'dashboard-btn-dark:disabled':darkBtnState}" mat-raised-button
+      [color]="'accent'" [disabled]="dashboardBtnState" (click)="openDashboardDialog()">Go to
       Dashboard</button>
 
     <div style="display: inline;">
-      <input type="text" name="search" id="search" placeholder="Search survey name" [(ngModel)]="searchText"
-        (input)="searchName()">
+      <input class="input-search" type="text" name="search" id="search" placeholder="Search survey name"
+        [(ngModel)]="searchText" (input)="searchName()">
       <mat-icon class="search-icon">search</mat-icon>
     </div>
 
     <button mat-stroked-button [color]="'accent'" class="filter-button" id="filterButton"
       (click)="toggleFilterMenu()">Filter</button>
-    <div [fxHide]="filterMenuToggle" class="filter-menu" fxLayout="row grid" id='filterMenu'>
+    <div [fxHide]="filterMenuToggle" class="filter-menu"
+      [ngClass]="{'filter-menu-lg':textBtnState,'filter-menu-dark':darkBtnState}" fxLayout="row grid" id='filterMenu'>
       <mat-form-field appearance="outline" fxFlex="80%">
         <mat-label>Choose the start date</mat-label>
         <input matInput [matDatepicker]="picker" [(ngModel)]="startDateInput">
@@ -56,8 +59,19 @@
     <mat-icon [ngClass]="{'view-icon-not-active': !viewBtnState,
       'view-icon-active': viewBtnState}">view_module</mat-icon>
   </button>
-  <button mat-icon-button id="view-list-icon" (click)="onIconClick('list')">
+  <button mat-icon-button (click)="onIconClick('list')">
     <mat-icon [ngClass]="{'view-icon-not-active': viewBtnState,
       'view-icon-active': !viewBtnState}">view_list</mat-icon>
+  </button>
+</span>
+
+<span class="access-icons">
+  <button mat-icon-button (click)="onTextBtnClick()">
+    <mat-icon [ngClass]="{'view-icon-not-active': !textBtnState,
+      'view-icon-active': textBtnState}">text_format</mat-icon>
+  </button>
+  <button mat-icon-button (click)="onDarkBtnClick()">
+    <mat-icon [ngClass]="{'view-icon-not-active': !darkBtnState,
+      'view-icon-active': darkBtnState}">dark_mode</mat-icon>
   </button>
 </span>

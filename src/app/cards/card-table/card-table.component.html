@@ -2,7 +2,8 @@
     <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 table">
 
         <ng-container matColumnDef="Survey Name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Survey Name</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><span [ngClass]="{'fs-lg':textBtnState}">Survey
+                    Name</span></th>
             <td mat-cell *matCellDef="let row">
 
                 <ng-container [ngSwitch]="row.SURVEY_STATUS_EN">
@@ -10,33 +11,37 @@
                         style="color:rgb(102, 202, 155)"></fa-icon>
                     <mat-icon *ngSwitchCase="'Expired'" class="card-icon" style="color: grey;">alarm</mat-icon>
                     <mat-icon *ngSwitchCase="'Closed'" class="card-icon" style="color: grey;">lock</mat-icon>
-                    <span>{{row.SurveyName}}</span>
+                    <span [ngClass]="{'fs-lg':textBtnState}">{{row.SurveyName}}</span>
 
                 </ng-container>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="Start Date">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>From</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><span [ngClass]="{'fs-lg':textBtnState}">From</span>
+            </th>
             <td mat-cell *matCellDef="let row">
-                <span *ngIf="row.SurveyPeriods.length === 1">
+                <span *ngIf="row.SurveyPeriods.length === 1" [ngClass]="{'fs-lg':textBtnState}">
                     {{row.SurveyPeriods[0].START_DATE}}</span>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="End Date">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>To</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><span [ngClass]="{'fs-lg':textBtnState}">To</span>
+            </th>
             <td mat-cell *matCellDef="let row">
-                <span *ngIf="row.SurveyPeriods.length === 1">
+                <span *ngIf="row.SurveyPeriods.length === 1" [ngClass]="{'fs-lg':textBtnState}">
                     {{row.SurveyPeriods[0].END_DATE}}</span>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="Survey Periods">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Period</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><span [ngClass]="{'fs-lg':textBtnState}">Period</span>
+            </th>
             <td mat-cell *matCellDef="let row;">
 
-                <mat-form-field [floatLabel]="'never'" *ngIf="row.SurveyPeriods.length > 1">
+                <mat-form-field class="surv-periods" [ngClass]="{'surv-periods-lg':textBtnState}" [floatLabel]="'never'"
+                    *ngIf="row.SurveyPeriods.length > 1">
                     <mat-select placeholder="Select Period" style="min-width: 100px"
                         (selectionChange)="choosePeriod($event.value, row)">
                         <mat-option *ngFor="let period of row.SurveyPeriods" [value]="period">

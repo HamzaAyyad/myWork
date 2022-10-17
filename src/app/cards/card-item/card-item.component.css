@@ -1,7 +1,18 @@
 .card {
-    width: 220px;
-    margin-left: 10px;
+    width: 250px;
+    margin-left: 25px;
     margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.fs-lg {
+    font-size: 22px;
+}
+
+.card-lg {
+    width: 300px;
+    font-size: 25px;
+    margin-left: 60px;
 }
 
 .card-Published {
@@ -60,14 +71,32 @@
 }
 
 .surv-period {
-    height: 15px;
-    margin-top: 5px;
+    height: 25px;
+    margin-top: 10px;
 }
 
 .survey-periods {
-    height: 42px;
-    margin-top: -10px;
+    height: 60px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: -25px;
     text-align: center;
+}
+
+.survey-periods-lg {
+    margin-top: 0px;
+    margin-bottom: -10px;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+    margin-top: -20px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+::ng-deep .mat-select {
+    text-align: center !important;
+    margin-bottom: 10px !important;
 }
 
 ::ng-deep .mat-form-field-underline {
