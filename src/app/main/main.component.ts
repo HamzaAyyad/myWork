@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccessibilityService } from '../services/accessibility.service';
 
 @Component({
   selector: 'app-main',
@@ -7,10 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
   viewType: boolean = true;
+  darkModeInitial:string;
+  darkMode:string;
+  darkBtnState:boolean;
 
-  constructor() { }
+  constructor(private accessService:AccessibilityService) { }
 
   ngOnInit(): void {
+
+    this.darkModeInitial = this.accessService.getKeyData('darkMode')
+    if (this.darkModeInitial === 'light') {
+      this.darkBtnState = false
+    } else {
+      this.darkBtnState = true
+    }
+
+    this.accessService.onDarkModeChange().subscribe(value => {
+      this.darkMode = value;
+      if (this.darkMode === 'light') {
+        this.darkBtnState = false
+      } else {
+        this.darkBtnState = true
+      }
+    })
   }
 
   toggleView(eve) {

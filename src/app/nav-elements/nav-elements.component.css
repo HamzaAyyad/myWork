@@ -71,7 +71,8 @@
 }
 
 .filter-menu {
-  background-color: white;
+  background-color: #3a3a3a;
+  color: white;
   border-radius: 5px;
   padding-top: 10px;
   padding-bottom: 10px;

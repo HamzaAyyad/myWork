@@ -61,7 +61,9 @@ export class NavElementsComponent implements OnInit {
     this.darkMode = this.accessSevice.getKeyData('darkMode')
     if (this.darkMode === 'light') {
       this.darkBtnState = false
+      document.body.style.backgroundColor = 'rgb(245, 243, 243)'
     } else {
+      document.body.style.backgroundColor = 'black'
       this.darkBtnState = true
     }
   }
